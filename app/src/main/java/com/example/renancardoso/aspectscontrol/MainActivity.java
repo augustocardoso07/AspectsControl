@@ -2,6 +2,7 @@ package com.example.renancardoso.aspectscontrol;
 
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
+import com.example.renancardoso.aspectscontrol.Models.Grades;
 import com.github.clans.fab.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionMenu;
+
+import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +33,25 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"fab add clicked", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        Grades grade1 = new Grades();
+        grade1.setGrade(100);
+        grade1.setTag("Planing");
+        grade1.setCreatedAt("2015-11-25 23:25:00");
+
+        Grades grade2 = new Grades();
+        grade2.setGrade(50);
+        grade2.setTag("Planing");
+        grade2.setCreatedAt("2015-11-25 23:25:00");
+
+        Grades grade3 = new Grades();
+        grade3.setGrade(100);
+        grade3.setTag("Health");
+        grade3.setCreatedAt("2015-11-25 23:25:00");
+
+        Realm.init(this);
+        Realm realm = Realm.getDefaultInstance();
 
     }
 
