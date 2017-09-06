@@ -1,5 +1,7 @@
 package com.example.renancardoso.aspectscontrol.Models;
 
+import java.util.Date;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -14,8 +16,8 @@ public class Aspects extends RealmObject {
     private long id;
     private String name;
     private int status;
-    private String createdAt;
-    private String finalizedAt;
+    private Date createdAt;
+    private Date finalizedAt;
     private RealmList<Grades> grades;
 
     public long getId() {
@@ -42,19 +44,19 @@ public class Aspects extends RealmObject {
         this.status = status;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getFinalizedAt() {
+    public Date getFinalizedAt() {
         return finalizedAt;
     }
 
-    public void setFinalizedAt(String finalizedAt) {
+    public void setFinalizedAt(Date finalizedAt) {
         this.finalizedAt = finalizedAt;
     }
 
