@@ -4,6 +4,7 @@ import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 import com.example.renancardoso.aspectscontrol.Models.Aspects;
 import com.example.renancardoso.aspectscontrol.Models.Grades;
+import com.facebook.stetho.Stetho;
 import com.github.clans.fab.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionMenu;
+import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +43,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Realm.init(this);
-        testingSave();
+
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
+                        .build());
+        //testingSave();
 
     }
 
