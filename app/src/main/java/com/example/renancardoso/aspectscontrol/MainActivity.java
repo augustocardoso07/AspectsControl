@@ -38,20 +38,15 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"fab add clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"fake data added", Toast.LENGTH_SHORT).show();
+
             }
         });
 
-        Realm.init(this);
-
-        Stetho.initialize(
-                Stetho.newInitializerBuilder(this)
-                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-                        .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
-                        .build());
         //testingSave();
 
     }
+
 
     private void testingSave() {
         Grades grade1 = new Grades();
