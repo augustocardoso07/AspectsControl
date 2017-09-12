@@ -6,6 +6,7 @@ import com.facebook.stetho.Stetho;
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * Created by RenanCardoso on 12/09/2017.
@@ -18,10 +19,10 @@ public class MyApplication extends Application {
         // Initialize Realm. Should only be done once when the application starts.
         Realm.init(this);
 
-//        RealmConfiguration config = new RealmConfiguration.Builder(this).name(AppConstants.REALM_NAME)
-//                .deleteRealmIfMigrationNeeded().build();
-//        Realm.setDefaultConfiguration(config);
-        
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded().build();
+        Realm.setDefaultConfiguration(config);
+
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this)
                         .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))

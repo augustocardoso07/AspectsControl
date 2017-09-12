@@ -4,4 +4,7 @@
 
     <string name="add_new_Aspect">Add New Aspect</string>
     <string name="start_notes_routine">Start Notes Routine</string>
+
+    <string name="aspect_name">Aspect Name</string>
+    <string name="save">Save</string>
 </resources>

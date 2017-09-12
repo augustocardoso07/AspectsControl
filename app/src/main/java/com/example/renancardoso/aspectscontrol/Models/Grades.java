@@ -10,21 +10,12 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class Grades extends RealmObject {
-    @PrimaryKey
-    private long id;
+
     private int grade;
     private String tag;
     private Date createdAt;
 
     public Grades() {};
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public int getGrade() {
         return grade;

@@ -12,21 +12,12 @@ import io.realm.annotations.PrimaryKey;
 
 public class Aspects extends RealmObject {
 
-    @PrimaryKey
-    private long id;
+
     private String name;
     private int status;
     private Date createdAt;
     private Date finalizedAt;
     private RealmList<Grades> grades;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

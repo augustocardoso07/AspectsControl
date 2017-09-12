@@ -1,5 +1,6 @@
 package com.example.renancardoso.aspectscontrol;
 
+import android.content.Intent;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 import com.example.renancardoso.aspectscontrol.Models.Aspects;
@@ -33,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.menu_add_aspect);
+        FloatingActionButton fabAdd = (FloatingActionButton) findViewById(R.id.menu_add_aspect);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"fake data added", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, NewAspect.class));
 
             }
         });
@@ -50,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void testingSave() {
         Grades grade1 = new Grades();
-        grade1.setId(4);
+
         grade1.setGrade(100);
         grade1.setTag("Planing");
         grade1.setCreatedAt(new Date());
 
         Grades grade2 = new Grades();
-        grade2.setId(5);
+
         grade2.setGrade(50);
         grade2.setTag("Planing");
         grade2.setCreatedAt(new Date());
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         grade3.setCreatedAt(new Date());
 
         Aspects memory = new Aspects();
-        memory.setId(1);
+
         memory.setName("Memory");
         memory.setStatus(2);
         memory.setGrades(new RealmList<Grades>());
@@ -97,7 +98,12 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_delete_all) {
+            Realm realm = Realm.getDefaultInstance();
+            realm.beginTransaction();
+            realm.deleteAll();
+            realm.commitTransaction();
+            Toast.makeText(this, "All data deleted", Toast.LENGTH_SHORT).show();
             return true;
         }
 
