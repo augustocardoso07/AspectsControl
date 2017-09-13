@@ -1,4 +1,4 @@
-package com.example.renancardoso.aspectscontrol;
+package com.example.renancardoso.aspectscontrol.application;
 
 import android.app.Application;
 
@@ -12,7 +12,7 @@ import io.realm.RealmConfiguration;
  * Created by RenanCardoso on 12/09/2017.
  */
 
-public class MyApplication extends Application {
+public class AspectsApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();

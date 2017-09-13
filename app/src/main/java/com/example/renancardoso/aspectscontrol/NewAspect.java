@@ -38,7 +38,7 @@ public class NewAspect extends AppCompatActivity {
                     realm.copyToRealm(aspect);
                     realm.commitTransaction();
 
-                    toast(aspect.getName() + " save whit success!");
+                    MyUtil.toast(NewAspect.this, aspect.getName() + " save whit success!");
                 } finally {
                     realm.close();
                     finish();
@@ -47,7 +47,4 @@ public class NewAspect extends AppCompatActivity {
         });
     }
 
-    private void toast(CharSequence text) {
-        Toast.makeText(NewAspect.this, text, Toast.LENGTH_SHORT).show();
-    }
 }
