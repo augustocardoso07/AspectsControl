@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
+import com.example.renancardoso.aspectscontrol.Adapters.AspectsAdapter;
 import com.example.renancardoso.aspectscontrol.Models.Aspects;
 import com.example.renancardoso.aspectscontrol.Models.Grades;
 import com.facebook.stetho.Stetho;
@@ -35,8 +36,8 @@ import io.realm.RealmResults;
 public class MainActivity extends AppCompatActivity {
 
     Realm realm;
-    ArrayList<String> aspectNames;
-    ArrayAdapter<String> adapter;
+
+    AspectsAdapter adapter;
     ListView allAspects;
     RealmResults<Aspects> aspectsFromRealm;
 
@@ -60,13 +61,16 @@ public class MainActivity extends AppCompatActivity {
         fabStartRoutine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startNotesRoutine();
+                showAspectForGrade(0);
             }
         });
 
         realm = Realm.getDefaultInstance();
         allAspects = (ListView) findViewById(R.id.lt_aspects);
         //testingSave();
+        aspectsFromRealm = realm.where(Aspects.class).findAll();
+        adapter = new AspectsAdapter(this, aspectsFromRealm);
+        allAspects.setAdapter(adapter);
 
     }
 
@@ -74,22 +78,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        aspectNames = new ArrayList<>();
+        adapter.notifyDataSetChanged();
 
-        aspectsFromRealm = realm.where(Aspects.class).findAll();
-
-        for (Aspects aspect : aspectsFromRealm) {
-            aspectNames.add(aspect.getName());
-        }
-
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, aspectNames);
-        allAspects.setAdapter(adapter);
-
-    }
-
-
-    private void startNotesRoutine() {
-        showAspectForGrade(0);
     }
 
     private void showAspectForGrade(final int position) {
@@ -102,9 +92,11 @@ public class MainActivity extends AppCompatActivity {
 
         View v = inflater.inflate(R.layout.grade_setter, null);
         builder.setView(v);
+
         final NumberPicker np = (NumberPicker) v.findViewById(R.id.np_aspect_grade);
         np.setMinValue(0);
         np.setMaxValue(100);
+
         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
