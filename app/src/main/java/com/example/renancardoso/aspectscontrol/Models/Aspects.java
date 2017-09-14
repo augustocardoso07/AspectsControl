@@ -58,4 +58,10 @@ public class Aspects extends RealmObject {
     public void setGrades(RealmList<Grades> grades) {
         this.grades = grades;
     }
+
+    public double meanGrades() {
+        if (grades == null) return 0;
+
+        return grades.average("grade");
+    }
 }
