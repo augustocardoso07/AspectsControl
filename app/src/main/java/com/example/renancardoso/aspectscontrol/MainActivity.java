@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         final NumberPicker np = (NumberPicker) v.findViewById(R.id.np_aspect_grade);
         np.setMinValue(0);
-        np.setMaxValue(100);
+        np.setMaxValue(10);
 
         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
