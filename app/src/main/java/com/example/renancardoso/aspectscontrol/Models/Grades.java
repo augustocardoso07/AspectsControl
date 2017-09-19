@@ -11,13 +11,13 @@ import io.realm.annotations.PrimaryKey;
 
 public class Grades extends RealmObject {
 
-    private int grade;
-    private String tag;
+    private float grade;
+    private Date date;
     private Date createdAt;
 
     public Grades() {};
 
-    public int getGrade() {
+    public float getGrade() {
         return grade;
     }
 
@@ -25,12 +25,12 @@ public class Grades extends RealmObject {
         this.grade = grade;
     }
 
-    public String getTag() {
-        return tag;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Date getCreatedAt() {

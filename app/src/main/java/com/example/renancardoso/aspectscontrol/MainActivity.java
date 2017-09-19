@@ -17,9 +17,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionMenu;
@@ -66,11 +68,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
         realm = Realm.getDefaultInstance();
+        //MyUtil.generateFiveAspects();
         allAspects = (ListView) findViewById(R.id.lt_aspects);
-        //testingSave();
         aspectsFromRealm = realm.where(Aspects.class).findAll();
         adapter = new AspectsAdapter(this, aspectsFromRealm);
         allAspects.setAdapter(adapter);
+
+        allAspects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, AspectGradesChartActivity.class);
+                TextView aspectId = (TextView) view.findViewById(R.id.tv_aspect_item_name);
+                intent.putExtra("aspectId", aspectId.getText().toString());
+                startActivity(intent);
+            }
+        });
+
 
     }
 

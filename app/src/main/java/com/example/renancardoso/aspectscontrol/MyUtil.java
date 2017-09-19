@@ -21,37 +21,37 @@ public class MyUtil {
         Toast.makeText(c, t, Toast.LENGTH_SHORT).show();
     }
 
-    public static void testingSave() {
-        Grades grade1 = new Grades();
-
-        grade1.setGrade(100);
-        grade1.setTag("Planing");
-        grade1.setCreatedAt(new Date());
-
-        Grades grade2 = new Grades();
-
-        grade2.setGrade(50);
-        grade2.setTag("Planing");
-        grade2.setCreatedAt(new Date());
-
-        Grades grade3 = new Grades();
-        grade3.setGrade(100);
-        grade3.setTag("Health");
-        grade3.setCreatedAt(new Date());
-
-        Aspects memory = new Aspects();
-
-        memory.setName("Memory");
-        memory.setStatus(2);
-        memory.setGrades(new RealmList<Grades>());
-        memory.getGrades().add(grade1);
-        memory.getGrades().add(grade2);
+    public static void generateFiveAspects() {
 
         Realm realm = Realm.getDefaultInstance();
 
-        realm.beginTransaction();
-        realm.copyToRealm(memory);
 
-        realm.commitTransaction();
+        for (int i = 0; i <= 5; i++) {
+
+            Grades grade1 = new Grades();
+            grade1.setGrade((int)(Math.random() * 11));
+            grade1.setCreatedAt(new Date());
+
+            Grades grade2 = new Grades();
+            grade2.setGrade((int)(Math.random() * 11));
+            grade2.setCreatedAt(new Date());
+
+            Grades grade3 = new Grades();
+            grade3.setGrade((int)(Math.random() * 11));
+            grade3.setCreatedAt(new Date());
+
+            Aspects aspect = new Aspects();
+
+            aspect.setName("Aspect " + i);
+            aspect.setGrades(new RealmList<Grades>());
+            aspect.getGrades().add(grade1);
+            aspect.getGrades().add(grade2);
+            aspect.getGrades().add(grade3);
+
+            realm.beginTransaction();
+            realm.copyToRealm(aspect);
+            realm.commitTransaction();
+        }
+
     }
 }

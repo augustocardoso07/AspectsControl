@@ -12,8 +12,9 @@ import io.realm.annotations.PrimaryKey;
 
 public class Aspects extends RealmObject {
 
-
+    @PrimaryKey
     private String name;
+    private String tag;
     private int status;
     private Date createdAt;
     private Date finalizedAt;
@@ -25,6 +26,14 @@ public class Aspects extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public int getStatus() {
