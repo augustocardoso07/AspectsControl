@@ -26,27 +26,21 @@ public class MyUtil {
         Realm realm = Realm.getDefaultInstance();
 
 
-        for (int i = 0; i <= 5; i++) {
-
-            Grades grade1 = new Grades();
-            grade1.setGrade((int)(Math.random() * 11));
-            grade1.setCreatedAt(new Date());
-
-            Grades grade2 = new Grades();
-            grade2.setGrade((int)(Math.random() * 11));
-            grade2.setCreatedAt(new Date());
-
-            Grades grade3 = new Grades();
-            grade3.setGrade((int)(Math.random() * 11));
-            grade3.setCreatedAt(new Date());
+        for (int i = 28; i <= 30; i++) {
 
             Aspects aspect = new Aspects();
 
             aspect.setName("Aspect " + i);
             aspect.setGrades(new RealmList<Grades>());
-            aspect.getGrades().add(grade1);
-            aspect.getGrades().add(grade2);
-            aspect.getGrades().add(grade3);
+
+            for (int ii = 0; ii <= 1000; ii++)  {
+                Grades grade = new Grades();
+                grade.setGrade((int)(Math.random() * 11));
+                grade.setCreatedAt(new Date());
+
+                aspect.getGrades().add(grade);
+            }
+
 
             realm.beginTransaction();
             realm.copyToRealm(aspect);
