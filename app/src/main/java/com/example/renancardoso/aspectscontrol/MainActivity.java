@@ -52,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton fabAdd = (FloatingActionButton) findViewById(R.id.menu_add_aspect);
         FloatingActionButton fabStartRoutine = (FloatingActionButton) findViewById(R.id.menu_start_notes_routine);
+        FloatingActionButton fabCalendar = (FloatingActionButton) findViewById(R.id.menu_calendar);
+
+        fabCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, CalendarActivity.class));
+            }
+        });
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override

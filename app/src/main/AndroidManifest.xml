@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".NewAspect" />
         <activity android:name=".AspectGradesChartActivity"></activity>
+        <activity android:name=".CalendarActivity"></activity>
+
     </application>
 
 </manifest>
