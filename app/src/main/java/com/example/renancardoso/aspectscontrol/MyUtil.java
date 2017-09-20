@@ -21,19 +21,19 @@ public class MyUtil {
         Toast.makeText(c, t, Toast.LENGTH_SHORT).show();
     }
 
-    public static void generateFiveAspects() {
+    public static void generateAspects(int nUsers, int nGrades) {
 
         Realm realm = Realm.getDefaultInstance();
+        if (realm.where(Aspects.class).findAll().size() >= 1) return;
 
-
-        for (int i = 28; i <= 30; i++) {
+        for (int i = 0; i <= nUsers; i++) {
 
             Aspects aspect = new Aspects();
 
             aspect.setName("Aspect " + i);
             aspect.setGrades(new RealmList<Grades>());
 
-            for (int ii = 0; ii <= 1000; ii++)  {
+            for (int ii = 0; ii <= nGrades; ii++)  {
                 Grades grade = new Grades();
                 grade.setGrade((int)(Math.random() * 11));
                 grade.setCreatedAt(new Date());
@@ -41,10 +41,13 @@ public class MyUtil {
                 aspect.getGrades().add(grade);
             }
 
+            try {
+                realm.beginTransaction();
+                realm.copyToRealm(aspect);
+                realm.commitTransaction();
+            } finally {
 
-            realm.beginTransaction();
-            realm.copyToRealm(aspect);
-            realm.commitTransaction();
+            }
         }
 
     }

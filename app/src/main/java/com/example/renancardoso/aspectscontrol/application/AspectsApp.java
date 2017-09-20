@@ -23,6 +23,7 @@ public class AspectsApp extends Application {
                 .deleteRealmIfMigrationNeeded().build();
         Realm.setDefaultConfiguration(config);
 
+        //@DebugOnly
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this)
                         .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))

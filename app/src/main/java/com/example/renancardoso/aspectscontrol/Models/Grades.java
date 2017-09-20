@@ -12,7 +12,6 @@ import io.realm.annotations.PrimaryKey;
 public class Grades extends RealmObject {
 
     private float grade;
-    private Date date;
     private Date createdAt;
 
     public Grades() {};
@@ -23,14 +22,6 @@ public class Grades extends RealmObject {
 
     public void setGrade(int grade) {
         this.grade = grade;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public Date getCreatedAt() {

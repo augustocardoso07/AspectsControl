@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.example.renancardoso.aspectscontrol.Adapters.AspectsAdapter;
 import com.example.renancardoso.aspectscontrol.Models.Aspects;
 import com.example.renancardoso.aspectscontrol.Models.Grades;
+import com.example.renancardoso.aspectscontrol.Models.RoutineDates;
 import com.facebook.stetho.Stetho;
 import com.github.clans.fab.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,12 +29,14 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,12 +74,30 @@ public class MainActivity extends AppCompatActivity {
         fabStartRoutine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showAspectForGrade(0);
+
+                RealmResults<RoutineDates> routineDates = realm.where(RoutineDates.class).findAll().sort("date", Sort.ASCENDING);
+                if (routineDates.isEmpty()) {
+                    showAspectForGrade(0);
+                    return;
+                }
+
+                RoutineDates rd = routineDates.last();
+
+                Date d = new Date();
+                boolean condition = d.getDay() == rd.getDate().getDay() &&
+                                    d.getMonth() == rd.getDate().getMonth() &&
+                                    d.getYear() == rd.getDate().getYear();
+
+                if (condition) {
+                    MyUtil.toast(MainActivity.this, "You already have started the grades routine today");
+                } else {
+                    showAspectForGrade(0);
+                }
             }
         });
 
         realm = Realm.getDefaultInstance();
-        //MyUtil.generateFiveAspects();
+        MyUtil.generateAspects(3, 3);
         allAspects = (ListView) findViewById(R.id.lt_aspects);
         aspectsFromRealm = realm.where(Aspects.class).findAll();
         adapter = new AspectsAdapter(this, aspectsFromRealm);
@@ -104,7 +125,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAspectForGrade(final int position) {
-        if (position >= aspectsFromRealm.size()) return;
+        if (position >= aspectsFromRealm.size()) {
+            realm.beginTransaction();
+            RoutineDates dr = realm.createObject(RoutineDates.class);
+            dr.setDate(new Date());
+            realm.commitTransaction();
+            return;
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final Aspects aspect = aspectsFromRealm.get(position);
@@ -121,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                MyUtil.toast(MainActivity.this, "" + np.getValue());
+
                 Grades grade = new Grades();
                 grade.setGrade(np.getValue());
                 grade.setCreatedAt(new Date());
@@ -130,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 aspect.getGrades().add(grade);
                 realm.commitTransaction();
                 showAspectForGrade(position + 1);
+                MyUtil.toast(MainActivity.this, "Grade added");
             }
         });
 
