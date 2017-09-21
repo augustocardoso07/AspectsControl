@@ -10,13 +10,19 @@
 
 
     <EditText
-        android:id="@+id/new_aspect_name"
+        android:id="@+id/et_new_aspect_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/aspect_name"/>
 
+    <EditText
+        android:id="@+id/et_new_aspect_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/aspect_tag"/>
+
     <Button
-        android:id="@+id/add_aspect"
+        android:id="@+id/bt_add_aspect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
