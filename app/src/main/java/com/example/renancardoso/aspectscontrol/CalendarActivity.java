@@ -50,7 +50,7 @@ public class CalendarActivity extends AppCompatActivity {
 
             @Override
             public void decorate(DayViewFacade view) {
-                view.addSpan(new DotSpan(5,0));
+                view.addSpan(new DotSpan(5,Color.GREEN));
             }
         };
         mcv.addDecorator(decorator);
@@ -63,7 +63,7 @@ public class CalendarActivity extends AppCompatActivity {
 //        mcv.setDateSelected(CalendarDay.from(2017,9,27), true);
         mcv.state().edit()
                 .setFirstDayOfWeek(Calendar.MONDAY)
-                .setMinimumDate(CalendarDay.from(2017, 9, 18))
+                .setMinimumDate(CalendarDay.from(2017, 7, 1))
                 .commit();
     }
 }

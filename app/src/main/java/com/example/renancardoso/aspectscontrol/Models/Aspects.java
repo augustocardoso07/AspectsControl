@@ -68,9 +68,9 @@ public class Aspects extends RealmObject {
         this.grades = grades;
     }
 
-    public double meanGrades() {
-        if (grades == null) return 0;
+    public String meanGrades() {
+        if (grades == null) return "0";
 
-        return grades.average("grade");
+        return String.format("%.2f", grades.average("grade"));
     }
 }
