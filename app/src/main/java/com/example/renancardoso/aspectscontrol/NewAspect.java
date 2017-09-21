@@ -61,7 +61,7 @@ public class NewAspect extends AppCompatActivity {
                     MyUtil.toast(NewAspect.this, aspect.getName() + " save whit success!");
                 } finally {
                     realm.close();
-                    finish();
+                    //finish();
                 }
             }
         });

@@ -1,10 +1,13 @@
 package com.example.renancardoso.aspectscontrol;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.renancardoso.aspectscontrol.Models.Aspects;
 import com.example.renancardoso.aspectscontrol.Models.Grades;
@@ -63,6 +66,34 @@ public class AspectGradesChartActivity extends AppCompatActivity {
                 return date;
             }
         };
+
+        Button endAspect = (Button) findViewById(R.id.bt_end_aspect);
+        endAspect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AspectGradesChartActivity.this);
+                builder.setTitle("End Aspect?");
+                builder.setMessage("Are you sure that you want to finalize the aspect?");
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.setPositiveButton("Finalize", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        realm.beginTransaction();
+                        aspect.setFinalizedAt(new Date());
+                        realm.commitTransaction();
+                        MyUtil.toast(AspectGradesChartActivity.this, "Aspect Finalized");
+                    }
+                });
+                builder.create().show();
+
+            }
+        });
 
         drawBarChart(aspect, formatter);
         //drawLineChart(aspect, formatter);

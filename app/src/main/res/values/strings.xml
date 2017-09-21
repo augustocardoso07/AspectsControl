@@ -9,4 +9,5 @@
     <string name="save">Save</string>
     <string name="view_calendar">Calendar</string>
     <string name="aspect_tag">Aspect Tag</string>
+    <string name="end_aspect">End Aspect</string>
 </resources>

@@ -54,7 +54,7 @@ public class AspectsAdapter extends BaseAdapter {
         TextView average = result.findViewById(R.id.tv_aspect_item_average);
 
         name.setText(aspects.get(i).getName());
-        average.setText("" + aspects.get(i).meanGrades());
+        average.setText(aspects.get(i).meanGrades());
 
         return result;
     }

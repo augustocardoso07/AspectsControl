@@ -97,9 +97,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         realm = Realm.getDefaultInstance();
-        MyUtil.generateAspects(3, 3);
+        //MyUtil.generateAspects(3, 3);
         allAspects = (ListView) findViewById(R.id.lt_aspects);
-        aspectsFromRealm = realm.where(Aspects.class).findAll();
+
+        aspectsFromRealm = realm.where(Aspects.class).isNull("finalizedAt").findAll();
         adapter = new AspectsAdapter(this, aspectsFromRealm);
         allAspects.setAdapter(adapter);
 

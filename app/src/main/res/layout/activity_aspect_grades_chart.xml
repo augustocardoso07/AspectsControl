@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.renancardoso.aspectscontrol.AspectGradesChartActivity">
+
+    <Button
+        android:id="@+id/bt_end_aspect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/end_aspect"/>
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/bc_aspect_chart"
@@ -20,4 +26,4 @@
 
     </com.github.mikephil.charting.charts.LineChart>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
